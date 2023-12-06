@@ -1,1 +1,1 @@
-# jobguardian-capstone-project
+# JobGuardian Capstone Project
