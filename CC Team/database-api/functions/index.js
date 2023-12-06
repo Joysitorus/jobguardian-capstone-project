@@ -163,6 +163,8 @@ app.put("/api/update/:jobId", (req, res) => {
 
 
 // api untuk profile user //
+
+// mencari user profile //
 app.get("/api/profile/:userId", (req, res) => {
   // Handle permintaan profil berdasarkan userID di sini
   const userId = req.params.userId;
@@ -170,7 +172,7 @@ app.get("/api/profile/:userId", (req, res) => {
   db.collection("Users").doc(userId).get()
     .then((doc) => {
       if (!doc.exists) {
-        return res.status(404).send({ status: "Failed", msg: "Profil tidak ditemukan" });
+        return res.status(404).send({ status: "Failed", msg: "Profil tidak ditemukan di database" });
       }
       const profileData = doc.data();
       return res.status(200).send({ status: "Success", data: profileData });
@@ -181,10 +183,11 @@ app.get("/api/profile/:userId", (req, res) => {
     });
 });
 
-// Endpoint lain untuk memperbarui profil pengguna
+
+// melakukan update user profile //
 app.put("/api/profile/update/:userId", (req, res) => {
   const userId = req.params.userId;
-  const updatedProfileData = req.body; // Data yang diperbarui untuk profil pengguna
+  const updatedProfileData = req.body;
 
   // Lakukan pembaruan profil di Firestore berdasarkan userId
   db.collection("Users").doc(userId).update(updatedProfileData)
