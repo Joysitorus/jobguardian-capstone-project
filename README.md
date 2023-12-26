@@ -1,1 +1,0 @@
-# JobGuardian Capstone Project
